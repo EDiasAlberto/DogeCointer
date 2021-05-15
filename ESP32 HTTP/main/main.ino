@@ -1,3 +1,4 @@
+//Includes all necessary libraries
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <Arduino_JSON.h>
@@ -11,6 +12,7 @@ const int SDAPin = 25; //GPIO pin on the ESP32 that the I2C's SDA pin is connect
 const int SCLPin = 33; //GPIO pin on the ESP32 that the I2C's SCL pin is connected to
 LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows); //Creates the object that represents the LCD display.
 
+//Sets up necessary network and API credentials.
 const char* ssid = "";
 const char* pass = "";
 const String binanceAPI = "https://api.binance.com/api/v3/ticker/price?symbol=DOGEGBP";
@@ -24,6 +26,7 @@ void setup() {
   lcd.backlight();
   lcd.home();
   
+  //Starts Serial connection and connects to LAN.
   Serial.begin(115200);
   WiFi.begin(ssid, pass);
   
@@ -38,6 +41,7 @@ void setup() {
 
 }
 
+//Function used to fetch and process the dogecoin price, returning a string of the price.
 String fetchDoge(){
   HTTPClient http;
   http.begin(binanceAPI.c_str());
@@ -59,6 +63,7 @@ String fetchDoge(){
 
 void loop() {
 
+  //Requests and outputs the Dogecoin price every 1 second.
   String price = fetchDoge();
   lcd.home();
   lcd.print("DOGE/GBP");
