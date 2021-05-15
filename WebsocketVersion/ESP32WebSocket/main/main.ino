@@ -3,8 +3,11 @@
 #include <WebSocketsClient.h>
 #include <LiquidCrystal_I2C.h>
 
-char* ssid = "TALKTALK48237E";
-char* pass = "8Y4ETH64";
+char* ssid = "";
+char* pass = "";
+
+const char* serverIP;
+const int serverPort = 4200;
 
 //Data used to setup the Display
 const int lcdColumns = 16; //Num of columns on the LCD display.
@@ -61,7 +64,7 @@ void setup(){
   Serial.println("Connected to WiFi.");
 
  
-  client.begin("192.168.1.56", 4200);
+  client.begin(serverIP, serverPort);
   Serial.println("Connection successful.");
   client.onEvent(webSocketEvent);
 

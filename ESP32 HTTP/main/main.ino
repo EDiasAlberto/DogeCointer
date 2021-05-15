@@ -11,8 +11,8 @@ const int SDAPin = 25; //GPIO pin on the ESP32 that the I2C's SDA pin is connect
 const int SCLPin = 33; //GPIO pin on the ESP32 that the I2C's SCL pin is connected to
 LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows); //Creates the object that represents the LCD display.
 
-const char* ssid = "TALKTALK48237E";
-const char* pass = "8Y4ETH64";
+const char* ssid = "";
+const char* pass = "";
 const String binanceAPI = "https://api.binance.com/api/v3/ticker/price?symbol=DOGEGBP";
 
 
