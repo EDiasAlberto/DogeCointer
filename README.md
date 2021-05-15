@@ -1,12 +1,12 @@
-#DogeCointer
+# DogeCointer
 
-##Requirements:
+## Requirements:
 * NodeJS:
-  *https
-  *ws
+  * https
+  * ws
 * ESP32:
-  *LiquidCrystalI2C
-  *Arduino JSON
-  *WebSocketsClient
-  *HTTPClient
+  * LiquidCrystalI2C
+  * Arduino JSON
+  * WebSocketsClient
+  * HTTPClient
   
