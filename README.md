@@ -10,7 +10,7 @@
   * WebSocketsClient
   * HTTPClient
 
-##Project description:
+## Project description:
 This is a simple pair of programs. The whole function is to print the price of dogecoin on a connected LCD.
 It has two methods of doing this, either the websocket edition or the HTTPS edition. The former involves a websocket server
 on a computer which queries Binance and processes the JSON, whilst the microprocessor just fetches the price from the server.
