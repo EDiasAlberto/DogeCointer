@@ -10,19 +10,24 @@ const server = new ws.Server({
 //Sets the options for the http request
 const httpOptions = {
   host: 'api.binance.com',
-  path: "/api/v3/ticker/price?symbol=DOGEGBP",
+  path: "/api/v3/ticker/price?symbol=",
 };
 
 //sets the variable so it can be easily printed later
 var dogePrice = "";
 
 //sets the empty list in case more than one socket is connected.
+let currencies = {};
 let sockets = [];
 console.log("Server is running");
 
 function handleData(httpResponse) {
   httpResponse.on("data", function(chunk){
     var chunk = JSON.parse(chunk);
+    if(chunk.code==-1121){ 
+        dogePrice = chunk.msg;
+	return;
+    }
     dogePrice = chunk.price;
     
   });
@@ -37,17 +42,17 @@ server.on('connection', function(socket) {
 
   //when the client sends any message, if it is "Gib.", then it responds with the price of dogecoin.
   socket.on('message', function(msg) {
+    currencies[socket] = msg;
+    console.log(msg);
     if(msg=="Gib."){
-      console.log(msg);
-      http.get(httpOptions, handleData).end();
-
-      socket.send(dogePrice);
+      httpOptions.path += "DOGEGBP";
     }
     else{
-      //Informs both client and server of invalid message.
-      console.log("Invalid request."); 
-      socket.send("Invalid request.");
+      httpOptions.path += msg;
     }
+      http.get(httpOptions, handleData).end();
+      socket.send(dogePrice);
+      httpOptions.path = httpOptions.path.slice(0,msg.length*-1);
   });
 
   socket.on('close', function() {
